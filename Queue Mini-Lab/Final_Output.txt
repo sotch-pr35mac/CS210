@@ -1,0 +1,20 @@
+The contents of this queue should be first, second, and third, respectively.
+The contents of this queue are: 
+First, Second, Third,  
+The dequeued element should be First
+The actual dequeued element: First
+ 
+Removing the remaining elements from the queue...
+Removing: 
+-Second 
+-Third 
+ 
+The contents of this queue should be: Fourth, Fifth, Sixth.
+The actual contents of this queue are: 
+Fourth, Fifth, Sixth,  
+
+
+
+
+
+
