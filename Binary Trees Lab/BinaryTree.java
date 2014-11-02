@@ -18,18 +18,18 @@ Modifications:
     Modifications Made:
 
 Description:
-    This file contains some of the implementation of a BinaryTree class. 
+    This file contains some of the implementation of a BinaryTree class.
     It is intended as an outline and starting point for the "Binary Trees"
-    lab in the Data Structures course.  The implementation is based on the 
+    lab in the Data Structures course.  The implementation is based on the
     recursive definition of a tree rather than on the graph theory definition
     of a tree (compare to Bailey, 190).
-    
+
     A binary tree is either:
         1.  An empty tree; or
-        2.  a node, called a root (the node contains the data), and two 
+        2.  a node, called a root (the node contains the data), and two
             children, left and right, each of which are themselves binary trees.
                 (Berman, "Data Structures via C++: Objects by Evolution", 1997.)
-    
+
     In this implementation, an empty tree is represented by a node with null
     data and null references for the children.  A leaf node is represented by
     a node with a data value and two references to empty trees (NOT a data
@@ -45,7 +45,7 @@ public class BinaryTree
     protected Object data;
     protected BinaryTree left;
     protected BinaryTree right;
-        
+
     /*tested*/
     /** Creates an empty binary tree with no data and no children. */
     public BinaryTree()
@@ -55,7 +55,7 @@ public class BinaryTree
         left = null;
         right = null;
     }
-     
+
     /*tested*/
     /** Tests whether this is an empty tree.
             @return true if the tree is empty; false otherwise
@@ -64,11 +64,11 @@ public class BinaryTree
     {
         return data == null;
     }
-   
+
     /*tested*/
     /** Gets the data associated with the root node of this particular tree
         (recall recursive definition of trees).
-            @return value associated with tree's root node; 
+            @return value associated with tree's root node;
                           null if tree is empty
     */
     public Object getElement()
@@ -101,7 +101,7 @@ public class BinaryTree
     */
     public boolean add(Object value)
     {
-        Queue queue = new LLQueue();
+        LLQueue queue = new LLQueue();
         queue.enqueue(this);
         while( ! queue.isEmpty() )
         {
@@ -109,7 +109,7 @@ public class BinaryTree
 
             //if the current position is null, then we know we can place a
             //value here.
-            //place the value in that position in the tree, and create new 
+            //place the value in that position in the tree, and create new
             //BinaryTrees for its children, which will both initially be null.
             if (tree.isEmpty())
             {
@@ -132,7 +132,7 @@ public class BinaryTree
 	*/
 	public void breadthFirstTraversal(NodeVisitor action)
 	{
-		Queue queue = new LLQueue();
+		LLQueue queue = new LLQueue();
 		queue.enqueue(this);
 		while( ! queue.isEmpty() )
 		{
@@ -144,8 +144,8 @@ public class BinaryTree
     			queue.enqueue(tree.rightTree());
             }
 		}
-	}	
-    
-    
+	}
+
+
 
 }    //end class BinaryTree
