@@ -13,9 +13,9 @@ Modifications:
         also modified to use NodeAction interface.
 
 Modifications:
-    Modifier: studentName
-    Modification Date: currentDate
-    Modifications Made:
+    Modifier: Preston Stosur-Bassett
+    Modification Date: 1.11.14
+    Modifications Made: Change Queue's to LLQueue and added LLQueue class to project
 
 Description:
     This file contains some of the implementation of a BinaryTree class.
@@ -145,6 +145,15 @@ public class BinaryTree
             }
 		}
 	}
+
+  /*
+    Traverses the tree in breath-first-order using a recursive algorithm
+    This tree must be be balanced
+      @param action an object that will act on all the nodes in the tree
+  */
+  public void recursivePreOrderTraversal(NodeVisitor action) {
+    
+  }
 
 
 

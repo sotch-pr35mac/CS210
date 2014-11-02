@@ -3,6 +3,10 @@
 	@author Autumn C. Spaulding
 	Creation Date: 24 July 2000
 
+	Modifications By: Preston Stosur-Bassett
+	Modifications Date: 1.11.14
+	Modifacations Description: Updated main method to traverse through a binary tree
+
 	More thorough documentation may be found within the BinaryTree class file.
 */
 
@@ -33,9 +37,16 @@ public class BinaryTreeLab
 
 
 		//traverse the tree in breadth-first order to see what you have done.
-        NodeVisitor printer = new PrintAction();
+    NodeVisitor printer = new PrintAction();
 		System.out.println("******Traversing Tree: breadth-first order******");
-		// tree.breadthFirstTraversal(printer);
+		tree.breadthFirstTraversal(printer);
+
+		//traverse the tree and calculate the sum
+		PrintSum calculator = new PrintSum();
+		System.out.println("******Traversing Tree: calculating sum******");
+		tree.breadthFirstTraversal(calculator);
+		//Print out the results
+		calculator.result();
 
 	}
 
