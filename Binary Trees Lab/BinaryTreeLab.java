@@ -61,7 +61,7 @@ public class BinaryTreeLab
 		tree.recursivePostOrderTraversal(printer, tree);
 
 		//traverse the tree and determine the smallest and largest values
-		NodeVisitor extremes = new ExtremeValueCalculator();
+		NodeVisitor extremes = new ExtremeValueCalculator("Integer");
 		System.out.println("******Traversing Tree: Calculating the Smallest and Largest Values******");
 		tree.breadthFirstTraversal(extremes);
 		ExtremeValueCalculator extremeValues = (ExtremeValueCalculator)extremes;
