@@ -48,6 +48,17 @@ public class BinaryTreeLab
 		//Print out the results
 		calculator.result();
 
+		//traverse the tree in recursive pre order to see what you have done.
+		System.out.println("******Traversing Tree: Recursive Pre-Order******");
+		tree.recursivePreOrderTraversal(printer, tree);
+
+		//traverse the tree in recursive in order to see what you have done
+		System.out.println("******Traversing Tree: Recursive In-Order******");
+		tree.recursiveInOrderTraversal(printer, tree);
+
+		//traverse the tree in recursive post order to see what you have done
+		System.out.println("******Traversing Tree: Recursive Post-Order******");
+		tree.recursivePostOrderTraversal(printer, tree);
 	}
 
 }	//end class BinaryTreeLab

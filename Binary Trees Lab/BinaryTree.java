@@ -46,6 +46,10 @@ public class BinaryTree
     protected BinaryTree left;
     protected BinaryTree right;
 
+    private int numberOfNodes = 0;
+    private int numberOfLeaves = 0;
+    private int depthOfTree = 0;
+
     /*tested*/
     /** Creates an empty binary tree with no data and no children. */
     public BinaryTree()
@@ -147,14 +151,142 @@ public class BinaryTree
 	}
 
   /*
-    Traverses the tree in breath-first-order using a recursive algorithm
-    This tree must be be balanced
-      @param action an object that will act on all the nodes in the tree
+    Traverses the tree in pre order using a recursive algorithm
+      @param action a NodeVisitor that will act on all the nodes in the tree
+      @param node a Binary Tree that is the tree to be traversed
   */
-  public void recursivePreOrderTraversal(NodeVisitor action) {
-    
+  public void recursivePreOrderTraversal(NodeVisitor action, BinaryTree node) {
+    if(node != null) {
+      //The tree is not empty
+      action.visit(node.getElement());
+      this.recursivePreOrderTraversal(action, node.leftTree());
+      this.recursivePreOrderTraversal(action, node.rightTree());
+    }
   }
 
+  /*
+    Traverses the tree in order using a recursive algorithm
+    @param action a NodeVisistor that will act on all the nodes in the tree.
+    @param node a BinaryTree that is the tree to be traversed
+  */
+  public void recursiveInOrderTraversal(NodeVisitor action, BinaryTree node) {
+    if(node != null) {
+      //The tree is not empty
+      this.recursiveInOrderTraversal(action, node.leftTree());
+      action.visit(node.getElement());
+      this.recursiveInOrderTraversal(action, node.rightTree());
+    }
+  }
 
+  /*
+    Traverses the tree in post order using a recursive algorithm
+    @param action a NodeVisitor that will act on all the nodes in the tree
+    @param node a BinaryTree that is the tree to be traversed
+  */
+  public void recursivePostOrderTraversal(NodeVisitor action, BinaryTree node) {
+    if(node != null) {
+      //The tree is not empty
+      this.recursivePostOrderTraversal(action, node.leftTree());
+      this.recursivePostOrderTraversal(action, node.rightTree());
+      action.visit(node.getElement());
+    }
+  }
 
+  /*
+    isLeaf will return true if the node that was passed to it was a leaf, false otherwise
+    @param BinaryTree node the node to check leaf status of.
+    @return boolean true if leaf, false otherwize
+  */
+  public boolean isLeaf(BinaryTree node) {
+    if(node.leftTree() == null && node.rightTree() == null ) {
+      return true;
+    }
+    return false;
+  }
+
+  /*
+    calculateNumNodes calculates the number of nodes in a tree recusively
+    A helper function for numNodes
+    @param BinaryTree node the node to traverse and calculate the count of nodes for
+  */
+  private void calculateNumNodes(BinaryTree node) {
+    if(node != null) {
+      numberOfNodes++;
+      this.calculateNumNodes(node.leftTree());
+      this.calculateNumNodes(node.rightTree());
+    }
+  }
+
+  /*
+    numNodes will return the number of nodes of the tree that was passed to it.
+    @param BinaryTree root the tree to count the nodes of
+    @return int the integer count of how many nodes are in the tree.
+  */
+  public int numNodes(BinaryTree root) {
+    numberOfNodes = 0;
+
+    if(root != null) {
+      calculateNumNodes(root);
+    }
+
+    return numberOfNodes;
+  }
+
+  /*
+    A helper function for numLeaves
+    calculateNumLeaves will calculate the number of leaves in a tree recursively
+    @param BinaryTree node the tree to traverse and count the leaves of
+  */
+  private void calculateNumLeaves(BinaryTree node) {
+    if(node != null) {
+      if(node.leftTree() == null && node.rightTree() == null) {
+        numberOfLeaves++;
+      }
+
+      this.calculateNumLeaves(node.leftTree());
+      this.calculateNumLeaves(node.rightTree());
+    }
+  }
+
+  /*
+    numLeaves will return the number of leaves of the tree that was passed to it.
+    @param BinaryTree root the tree to count the leaves of
+    @return int the integer count of how many leaves are in the tree.
+  */
+  public int numLeaves(BinaryTree root) {
+    numberOfLeaves = 0;
+
+    if(node != null) {
+      calculateNumLeaves(root);
+    }
+
+    return numberOfLeaves;
+  }
+
+  /*
+    A helper function for depth
+    calculateDepth calculates the depth of a tree by traversing its left side using recursion
+    @param BinaryTree node the tree to traverse
+  */
+  private void calculateDepth(BinaryTree node) {
+    if(node != null) {
+      depthOfTree++;
+      this.calculateDepth(node.leftTree());
+    }
+  }
+
+  /*
+    depth returns the depth of the tree that was passed to it
+    @param BinaryTree tree the tree to traverse and count depth
+    @return int the depth of the tree
+  */
+  public int depth(BinaryTree tree) {
+    depthOfTree = 0;
+
+    if(tree != null) {
+      calculateDepth(tree);
+    }
+
+    return depthOfTree;
+  }
 }    //end class BinaryTree
