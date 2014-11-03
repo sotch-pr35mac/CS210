@@ -7,6 +7,10 @@
   It determines the largest and smallest values in a tree.
 */
 
+import java.lang.IllegalArgumentException;
+import java.util.InputMismatchException;
+
+
 public class ExtremeValueCalculator implements NodeVisitor {
   private Object largest = null;
   private Object smallest = null;
@@ -15,6 +19,7 @@ public class ExtremeValueCalculator implements NodeVisitor {
   /*
     The constructor of ExtremeValueCalculator will create a new object and set the instance variables of the objects that it will be calculating
     @param String dataType a string of the data type that this class can calculate, either 'String' or 'Integer'
+    @throws IllegalArgumentException when the datatype passed to it is not String or Integer
   */
   public ExtremeValueCalculator(String dataType) {
     if(dataType.equals("String")) {
@@ -29,6 +34,7 @@ public class ExtremeValueCalculator implements NodeVisitor {
     }
     else {
       //Handle something else here
+      throw new IllegalArgumentException;
     }
     typed = dataType;
   }
@@ -36,6 +42,8 @@ public class ExtremeValueCalculator implements NodeVisitor {
   /*
     visit method determines the largest and smallest values in the tree
     @param Object data
+    @throws InputMismatchException when the data type of the Object passed to this method is not the same as the data type `this` object was initialzied with
+    @throws IllegalArgumentException when the data type of the object passed to thsi method is not either String or Integer
   */
   public void visit(Object data) {
     if(typed.equals("String")) {
@@ -52,6 +60,7 @@ public class ExtremeValueCalculator implements NodeVisitor {
       }
       else {
         //Throw an error, data types do not match
+        throw new InputMisMatchException;
       }
     }
     else if(typed.equals("Integer")) {
@@ -68,10 +77,12 @@ public class ExtremeValueCalculator implements NodeVisitor {
       }
       else {
         //Throw an error, data types do not match
+        throw new InputMismatchException;
       }
     }
     else {
       //Handle something else here
+      throw new IllegalArgumentException;
     }
   }
 
