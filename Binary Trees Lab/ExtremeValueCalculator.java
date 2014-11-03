@@ -34,7 +34,7 @@ public class ExtremeValueCalculator implements NodeVisitor {
     }
     else {
       //Handle something else here
-      throw new IllegalArgumentException;
+      throw new IllegalArgumentException();
     }
     typed = dataType;
   }
@@ -48,41 +48,45 @@ public class ExtremeValueCalculator implements NodeVisitor {
   public void visit(Object data) {
     if(typed.equals("String")) {
       //Handle String comparisons here
-      if(data instanceOf String) {
+      if(data instanceof String) {
         //Go ahead cast and do comparison
         String stringData = (String)data;
-        if(stringData.compareTo(largest) > 0) {
+        String stringLargest = (String)largest;
+        String stringSmallest = (String)smallest;
+        if(largest == null || stringData.compareTo(stringLargest) > 0) {
           largest = stringData;
         }
-        if(stringData.compareTo(smallest) < 0) {
+        if(smallest == null || stringData.compareTo(stringSmallest) < 0) {
           smallest = stringData;
         }
       }
       else {
         //Throw an error, data types do not match
-        throw new InputMisMatchException;
+        throw new InputMismatchException();
       }
     }
     else if(typed.equals("Integer")) {
       //Hanlde Integer comparisons here
-      if(data instanceOf Integer) {
+      if(data instanceof Integer) {
         //Go ahead an cast and do comparison
         Integer integerData = (Integer)data;
-        if(integerData.compareTo(largest) > 0) {
+        Integer integerLargest = (Integer)largest;
+        Integer integerSmallest = (Integer)smallest;
+        if(largest == null || integerData.compareTo(integerLargest) > 0) {
           largest = integerData;
         }
-        if(integerData.compareTo(smallest) < 0) {
+        if(smallest == null || integerData.compareTo(integerSmallest) < 0) {
           smallest = integerData;
         }
       }
       else {
         //Throw an error, data types do not match
-        throw new InputMismatchException;
+        throw new InputMismatchException();
       }
     }
     else {
       //Handle something else here
-      throw new IllegalArgumentException;
+      throw new IllegalArgumentException();
     }
   }
 

@@ -65,10 +65,8 @@ public class BinaryTreeLab
 		System.out.println("******Traversing Tree: Calculating the Smallest and Largest Values******");
 		tree.breadthFirstTraversal(extremes);
 		ExtremeValueCalculator extremeValues = (ExtremeValueCalculator)extremes;
-		System.out.println("Largest: ");
-		System.out.print(extremeValues.getLargest());
-		System.out.println("Smallest: ");
-		System.out.println(extremeValues.getSmallest());
+		System.out.println("Largest: "+extremeValues.getLargest());
+		System.out.println("Smallest: "+extremeValues.getSmallest());
 	}
 
 }	//end class BinaryTreeLab
