@@ -8,12 +8,29 @@
 */
 
 public class ExtremeValueCalculator implements NodeVisitor {
-  private Object largest;
-  private Object smallest;
+  private Object largest = null;
+  private Object smallest = null;
+  private String typed;
 
-  public ExtremeValueCalculator() {
-    largest = null;
-    smallest = null;
+  /*
+    The constructor of ExtremeValueCalculator will create a new object and set the instance variables of the objects that it will be calculating
+    @param String dataType a string of the data type that this class can calculate, either 'String' or 'Integer'
+  */
+  public ExtremeValueCalculator(String dataType) {
+    if(dataType.equals("String")) {
+      //Cast the largest and smallest as strings
+      largest = (String) largest;
+      smallest = (String) smallest;
+    }
+    else if(dataType.equals("Integer")) {
+      //Cast the largest and smallest as Integers
+      largest = (Integer) largest;
+      smallest = (Integer) smallest;
+    }
+    else {
+      //Handle something else here
+    }
+    typed = dataType;
   }
 
   /*
@@ -21,17 +38,40 @@ public class ExtremeValueCalculator implements NodeVisitor {
     @param Object data
   */
   public void visit(Object data) {
-    if(largest == null) {
-      largest = data;
+    if(typed.equals("String")) {
+      //Handle String comparisons here
+      if(data instanceOf String) {
+        //Go ahead cast and do comparison
+        String stringData = (String)data;
+        if(stringData.compareTo(largest) > 0) {
+          largest = stringData;
+        }
+        if(stringData.compareTo(smallest) < 0) {
+          smallest = stringData;
+        }
+      }
+      else {
+        //Throw an error, data types do not match
+      }
     }
-    if(smallest == null) {
-      smallest = data;
+    else if(typed.equals("Integer")) {
+      //Hanlde Integer comparisons here
+      if(data instanceOf Integer) {
+        //Go ahead an cast and do comparison
+        Integer integerData = (Integer)data;
+        if(integerData.compareTo(largest) > 0) {
+          largest = integerData;
+        }
+        if(integerData.compareTo(smallest) < 0) {
+          smallest = integerData;
+        }
+      }
+      else {
+        //Throw an error, data types do not match
+      }
     }
-    if(data.compareTo(largest) > 0) {
-      largest = data;
-    }
-    if(data.compareTo(smallest) < 0) {
-      smallest = data;
+    else {
+      //Handle something else here
     }
   }
 
@@ -40,7 +80,8 @@ public class ExtremeValueCalculator implements NodeVisitor {
     @return Object largest the largest value in the tree, null if tree has not been traversed
   */
   public Object getLargest() {
-    return largest;
+    Object returnLargest = (Object)largest;
+    return returnLargest;
   }
 
   /*
@@ -48,6 +89,7 @@ public class ExtremeValueCalculator implements NodeVisitor {
     @return Object smallest the smallest value in the tree, null if the tree has not been traversed
   */
   public Object getSmallest() {
-    return smallest;
+    Object returnSmallest = (Object)smallest;
+    return returnSmallest;
   }
 }
