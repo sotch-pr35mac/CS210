@@ -49,6 +49,8 @@ public class BinaryTree
     private int numberOfNodes = 0;
     private int numberOfLeaves = 0;
     private int depthOfTree = 0;
+    private boolean containsObject = false;
+    private int numberOfOccurances = 0;
 
     /*tested*/
     /** Creates an empty binary tree with no data and no children. */
@@ -288,5 +290,51 @@ public class BinaryTree
     }
 
     return depthOfTree;
+  }
+
+  /*
+    determineContains is a helper function for contains
+    determineContains checks the equality of a given Object and the data of this node elemnts
+    @param Object obj the Object to check equality for
+    @param BinaryTree node the binary tree of nodes to check equality against
+  */
+  private void determineContains(Object obj, BinaryTree node) {
+    if(node.getElement().equals(obj)) {
+      contains = true;
+    }
+    else {
+      this.determineContains(obj, node.leftTree());
+      this.determineContains(obj, node.rightTree());
+    }
+  }
+
+  /*
+    contains returns a boolean value of whether or not an object exists in this binary tree
+    @param Object obj the object to check equality for
+    @return boolean true if the object is in the tree, false otherwise
+  */
+  public boolean contains(Object obj) {
+    contains = false;
+
+    determineContains(obj, this);
+
+    return contains;
+  }
+
+  private void calculateOccurances(Object obj, BinaryTree tree) {
+    if(node.getElement.equals(obj)) {
+      numberOfOccurances++;
+    }
+
+    this.calculateOccurances(obj, tree.leftTree());
+    this.calculateOccurances(obj, tree.rightTree());
+  }
+
+  public int numOccurances(Object obj) {
+    numberOfOccurances = 0;
+
+    calculateOccurances(obj, this);
+
+    return numberOfOccurances;
   }
 }    //end class BinaryTree
