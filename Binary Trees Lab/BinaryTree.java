@@ -258,7 +258,7 @@ public class BinaryTree
   public int numLeaves(BinaryTree root) {
     numberOfLeaves = 0;
 
-    if(node != null) {
+    if(root != null) {
       calculateNumLeaves(root);
     }
 
@@ -300,7 +300,7 @@ public class BinaryTree
   */
   private void determineContains(Object obj, BinaryTree node) {
     if(node.getElement().equals(obj)) {
-      contains = true;
+      containsObject = true;
     }
     else {
       this.determineContains(obj, node.leftTree());
@@ -314,15 +314,15 @@ public class BinaryTree
     @return boolean true if the object is in the tree, false otherwise
   */
   public boolean contains(Object obj) {
-    contains = false;
+    containsObject = false;
 
     determineContains(obj, this);
 
-    return contains;
+    return containsObject;
   }
 
   private void calculateOccurances(Object obj, BinaryTree tree) {
-    if(node.getElement.equals(obj)) {
+    if(tree.getElement().equals(obj)) {
       numberOfOccurances++;
     }
 
