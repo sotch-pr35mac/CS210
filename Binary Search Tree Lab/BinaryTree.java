@@ -82,6 +82,22 @@ public class BinaryTree
         return data;
     }
 
+    /*
+    * Sets all values associated with this tree to null
+    */
+    public void emptyElement() {
+      data = null;
+      left = null;
+      right = null;
+    }
+
+    /*
+    * Sets the data element of this tree to null
+    */
+    public void removeElement() {
+      data = null;
+    }
+
     /*tested*/
     /** Gets the left child of the current tree.
             @return the left child (a tree)
@@ -336,5 +352,35 @@ public class BinaryTree
     calculateOccurances(obj, this);
 
     return numberOfOccurances;
+  }
+
+  /*
+  * <code>replaceElement</code> will replace the data attribute of this tree with the object passed to it.
+  * @param Object replaceWith
+  */
+  public void replaceElement(Object replaceWith) {
+    data = replaceWith;
+  }
+
+  /*
+  * <code>reset</code> will reset the tree to be empty
+  */
+  public void reset() {
+    data = null;
+    left = new BST();
+    right = new BST();
+  }
+
+  /*
+  * <code>isLeaf</code> check to see if this node is a leaf or not
+  * @return boolean true if node is leaf, false otherwise
+  */
+  public boolean isLeaf() {
+    boolean returnStatement = false;
+    if(this.leftTree().isEmpty() && this.rightTree().isEmpty()) {
+      returnStatement = true;
+    }
+
+    return returnStatement;
   }
 }    //end class BinaryTree
