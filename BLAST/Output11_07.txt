@@ -1,0 +1,31 @@
+There are 3 Match(es) for cgctgggtttccccggtggtgccgaaccagaacgcgagggtctgcttcaactcgttgaaccagtaaccgatgaccgtccctaccgtcaggctggcggtggcgtcgcgcagcaggccgtccgccaggcccgagaacacgaaatagacgatgcccagggcgcccaccagcagcacggcggtgatcgtcggccgtaccttgtcgttgggctgctgcgcggccagcttgcgggcgctgtcgcggtcggatgcctcggcagcatactgcgccgcggcggcttgcaggcggttctgttcggccgtcaccgcgagttgttgtttgxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+match of length 315 at index 0 in query, (40, 245)in database
+match of length 315 at index 0 in query, (41, 245)in database
+match of length 315 at index 0 in query, (42, 245)in database
+There are 1 Match(es) for ttccgcctcatttaaactaaccaatccccacgcctctcgcttctgtgcgcgcgctttctgctataaaacgagccatcagcccccaacgggcgcgcaagtctttgctgagacttgaccgccccgggtacccxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+match of length 130 at index 0 in query, (48, 250)in database
+There are 16 Match(es) for aggagcggggggaggagcggggggaggagcggggggaggagcggggggaggagcggggggcgggctgcgcacgccagccgggacgggtgagttcgctaggcaagcacggactggcggttacacgtgcatgcgtgccgagtgaactctcccgccccgacgcgctccggctccgggcctacggcgtgacataagtaagcgcgtcggcgtcctcagcgcgtttgcggcgtgctgtgtccggcgctttgtgcgcactgccgttgcgtggcgtcccgcggtgttttttttcgcggaccagcgccg
+match of length 60 at index 0 in query, (36, 108)in database
+match of length 60 at index 0 in query, (36, 120)in database
+match of length 60 at index 0 in query, (36, 132)in database
+match of length 60 at index 0 in query, (36, 144)in database
+match of length 60 at index 0 in query, (36, 156)in database
+match of length 60 at index 0 in query, (36, 168)in database
+match of length 60 at index 0 in query, (36, 180)in database
+match of length 60 at index 0 in query, (36, 192)in database
+match of length 60 at index 0 in query, (36, 204)in database
+match of length 60 at index 0 in query, (36, 216)in database
+match of length 60 at index 0 in query, (36, 228)in database
+match of length 60 at index 0 in query, (36, 240)in database
+match of length 60 at index 0 in query, (36, 252)in database
+match of length 56 at index 0 in query, (36, 264)in database
+match of length 120 at index 60 in query, (37, 300)in database
+match of length 120 at index 180 in query, (38, 720)in database
+There are 3 Match(es) for caagcattgacagattgttaagcacatacgcgcagattgtagcgacttacggctcaccaaatttagtgcatctattaatgctttgatttcttgcatggtcaaaaacttgttgcgctttttttcaatatcttctaaagtttccggtttttttagaggggggtgataaaagacccaagaacaaacactcttatcttttcataacctcttaatxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+match of length 62 at index 0 in query, (24, 180)in database
+match of length 90 at index 60 in query, (23, 660)in database
+match of length 60 at index 150 in query, (27, 260)in database
+There are 3 Match(es) for ttcttcacagtaaagaatataaagaaaaaattgcctgctaaaaacagaaagggtttccttataaaaagaaataaatatggtgtaccaaggcacaatgcaaaatatagatatgactatgaagtaatgaaagataagccatagatgcctggtggccctggggtgcacgatttgcactgaccaatgctggccactgtatcaggxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+match of length 70 at index 0 in query, (15, 560)in database
+match of length 72 at index 68 in query, (11, 548)in database
+match of length 60 at index 140 in query, (6, 690)in database
