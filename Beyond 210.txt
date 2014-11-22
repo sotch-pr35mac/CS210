@@ -1,0 +1,101 @@
+Notes on Java (Outside of Scope 210)
+
+//This is a constructor, you have to have a constructor, you cannot have a class without one
+private Node(key, data) {
+	int key;
+	String data;
+}
+
+//This is my question....
+"Cast the object to a Comparable class."
+	This just means that we have defined how to tell which object is:
+		--> less
+		--> equal
+		--> more
+
+
+//When building a tree
+-Everything less goes to the left, if not less, go to right
+
+//Red Black Trees
+Adjustments to BST
+1. Every node is either red or black
+2. The root node is black (some implementations allow the root to be red)
+3. Every leaf node (nil) is black
+4. If a node is red, its children are black
+5. For each node, all simple paths from the node to the descendant leaves contain the saem number of black nodes
+
+Effect of These Rules
+-These simple rules have important side effects:
+-Adding a node may require recoloring all ancestors up to and including the root
+-Adding a node may require resturctuing the tree
+-Add a node and then do an addition fixup routine
+-Deleting a node may require recoloring all ancestors
+-Deleting a node may require restructing the tree
+-Delete a node and then do a deletion fixup routine
+-All of these can be done in O(logn) time
+-After all the recoloing and restructing, the red-black properties are presevered
+A red black tree has a depth of no more than 2(logn+1) no matter how they key values are input5
+
+
+//Hashing
+1. Unique Hash function
+2. Least possible number of duplicates if we can we want a perfect hash
+3. If input is longer than output... must have possibility of duplicates
+4. Must deal with table loading 
+	RoT: Enlarge table load when load is about ~= 50% double the table
+	RoT: Table size at start should be ~= 150% of expected data load
+5. Must plan for deletes
+
+//Examples of HASH functions (avoid duplicates)
+/* Truncation: not the best way to do it (cut part off from either end or middle */
+-Mod with large prime number
+-Square then Hash
+-Fold and slice
+	-to some thing to take the two from the front, two from the middle and put them together
+	-rearrange before hash - like phone numbers
+
+
+//Heap (priority Queues and sorts)
+1. Binary tree
+2. Each node is the root of a heap
+3. Each child is the root of a heap
+4. Each child is less (more) than parent
+
+
+//Graphs & and how tstore them
+Graph: Non-empty set of vertices and edges (Aconnections between vertices) 
+	G(V,E) G(E,V)
+-A single point is a graph
+-Graphs can exist together, but not be connected
+Connected Graph: a path (chain) exists between any two vertices
+Graph = G(V,E)
+Digraph  G(A,E) ==> A = Arcs > one way
+
+Pingpong tournoment: 2 teams
+	T, T`, T``, T```, T````
+
+Storing graphs
+_ a b c d _
+a 0 1 1 0 
+b 1 0 0 1
+c 1 0 0 1
+d 0 1 1 0
+
+Know these graphs, how they relate to arrays, for the final
+
+Adjacency List (vertex and next neighbor)
+a -- b, c
+b -- a, c, d
+c -- a, b, d, 
+d -- b, c
+
+Use a two dementional array for storing graphs (digraphs)
+To store an adjacency list you can use a one dementional array to pointers to a linked list
+	They also have a data type called `vector` that works the same way (it gives you a list) (java, c++)
+	Could also use a list of linked lists
+
+Path - a way from one vertex to another (listing intermediate vertices if any)
+cycle - a path that vists a vertex ore than once
+tree - an acyclic graph
+
