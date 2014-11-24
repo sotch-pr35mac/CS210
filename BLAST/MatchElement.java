@@ -6,6 +6,8 @@
 * @description:  This class stores information for each match longer than a given threshold.
 */
 
+import java.util.*;
+
 public class MatchElement {
   private String subSequenceName;
   private ArrayList<Location> locationListing;

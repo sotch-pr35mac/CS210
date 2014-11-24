@@ -73,7 +73,7 @@ public class Database {
       if(ht.containsKey(currentSubstring) == true) {
         //The sequence was found!
         /** Record the current sequence and its locations, add it ot the array list */
-        LocsList currentList = ht.get(currentSubstring);
+        LocsList currentList = (LocsList)ht.get(currentSubstring);
         MatchElement matchedElement = new MatchElement(currentSubstring, currentList.getLocationListing());
         if(foundElementArray.contains(matchedElement) == false) {
           //The sequence has not already been found, add it once to the array
