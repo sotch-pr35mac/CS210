@@ -7,13 +7,14 @@
 // Modified November 19, 2006 to extend DNASeqReader
 
 import java.io.IOException;
+import java.util.*;
 
 /**
  * This class contains code to read DNA sequence data in from
  * a file.  It must be put into a data structure as it is read.
  * The data structure should be chosen by the modifier of this
  * class.
- * 
+ *
  * @author Pamela Cutter
  * @author Alyce Brady
  * @version Nov 19, 2006
@@ -22,6 +23,7 @@ public class DNADataReader extends DNASeqReader
 {
     private String filename;
     private int numLinesNucleoInfo;
+    private ArrayList<DNASequence> returnToDatabase;
 
     /** Constructs an object that reads DNA sequence information
      *  from the given file.  The data is assumed to be in the
@@ -34,7 +36,7 @@ public class DNADataReader extends DNASeqReader
      *      94717691 Campo. sono. ichnovirus segment W, complete sequence
      *      ctccaccaaa ctttgagagt cactacaaaa acattcacga tcgcttcact
      */
-    public DNADataReader(String filename, int numLinesNucleoInfo) 
+    public DNADataReader(String filename, int numLinesNucleoInfo)
     {
         super(filename);
         this.filename = filename;
@@ -47,35 +49,33 @@ public class DNADataReader extends DNASeqReader
      *  Precondition: the file must have been successfully opened for
      *                reading.
      */
-    public void readData()    // *** Replace void with the data structure type ***
+    public ArrayList<DNASequence> readData()
     {
-        // *** Create a data structure here to hold the entire database ***
-        // *** of sequence info ***
-       
-        try 
+        returnToDatabase = new ArrayList<DNASequence>();
+        try
         {
             // Read complete lines at a time, until end of file.
             String next;
-            while ( (next = this.readLine()) != null) 
+            while ( (next = this.readLine()) != null)
             {
                 //Debug.println(next);
 
                 if ( ! next.equals("") )
                     readInfoForOneSequence(next);
             }
-        } 
-        catch (IOException e) 
+        }
+        catch (IOException e)
         {
             System.err.println("Could not read line " +
                                (this.getLineNumber() + 1) +
                                " of file " + filename);
-            return /* *** null *** */ ;
+            return null;
         }
 
         // Debugging: Print out the elements in your data structure.
         Debug.println("No data structure created to print out (yet).");
 
-        return /* *** your data structure representing the database *** */ ;
+        return returnToDatabase;
     }
 
     /** Reads in the sequence information for a single DNA sequence in the file.
@@ -102,9 +102,9 @@ public class DNADataReader extends DNASeqReader
 
         Debug.println("Just read " + seq);
 
-        // *** Create a DNA sequence object from gi, desc, and seq. ***
+        DNASequence currentSequence = new DNASequence(gi, desc, seq);
         
-        // *** Add it to your data structure. ***
+        returnToDatabase.add(currentSequence);
         Debug.println("Should be adding an element to the data structure");
     }
 }

@@ -21,7 +21,7 @@ public class Database {
     //Ask the user what the filename is of the file they want to use to build the database off of
     ValidatedInputReader validInput = new ValidatedInputReader();
     String filename = new String(validInput.getString("Please provide the name of the file you would like to use to build the database.", "DNAData.txt"));
-    DNADataReader dataReader = new DNADataReader(filename);
+    DNADataReader dataReader = new DNADataReader(filename, 11);
 
     sequences = dataReader.readData();
 

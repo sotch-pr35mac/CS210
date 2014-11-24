@@ -13,7 +13,7 @@
 	@author Preston Stosur-Bassett
 	@course CS210 (Data Structures)
 	@date 22.09.14 (dd.mm.yy)
-	@assignment Indexing Substrings
+	@assignment BLAST
 */
 
 public class DNASequence {
