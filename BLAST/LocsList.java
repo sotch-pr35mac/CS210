@@ -37,6 +37,15 @@ public class LocsList {
   }
 
   /*
+    <code>getLocationListing</code> will return the ArrayList<Location> so it can be applied to other methods.
+
+    @return ArrayList<Location> the sequenceLocs object
+  */
+  public ArrayList<Location> getLocationListing() {
+    return sequenceLocs;
+  }
+
+  /*
     <code>size</code> will return the size of the the list of the locations
 
     @return int size of the list of locations

@@ -38,7 +38,7 @@ public class Database {
   */
   private void runLine(String currentSequence, int lineNumber) {
     int startIndex = 0; //The start index of the substring
-    int endIndex = 11; //The end index of the substring
+    int endIndex = 10; //The end index of the substring
     while(endIndex <= currentSequence.length()) {
       String currentSubstring = currentSequence.substring(startIndex, endIndex); //The current substring of the current sequence
       Location currentLocation = new Location(lineNumber, startIndex); //The current location for the current substring
@@ -55,6 +55,37 @@ public class Database {
       startIndex++;
       endIndex++;
     }
+  }
+
+  /*
+    <code>search</code> will search the data base for the DNA sub-sequence of the sequence passed to it and will return an ArrayList<MatchElement>
+
+    @param DNASequence the dna sequence to split into subsquences and search the databaes for that subsequence
+    @return ArrayList<MatchElement> an array list of substrings that matched and their locations
+  */
+  public ArrayList<MatchElement> search(String currentSequence) {
+    ArrayList<MatchElement> foundElementArray = new ArrayList<MatchElement>();
+    int startIndex = 0; // The start index of the substring
+    int endIndex = 0; //The end index of the substring
+    while(endIndex <= currentSequence.length()) {
+      String currentSubstring = currentSequence.substring(startIndex, endIndex); //The current substring of the current sequence
+
+      if(ht.containsKey(currentSubstring) == true) {
+        //The sequence was found!
+        /** Record the current sequence and its locations, add it ot the array list */
+        LocsList currentList = ht.get(currentSubstring);
+        MatchElement matchedElement = new MatchElement(currentSubstring, currentList.getLocationListing());
+        if(foundElementArray.contains(matchedElement) == false) {
+          //The sequence has not already been found, add it once to the array
+          foundElementArray.add(matchedElement);
+        }
+      }
+
+      startIndex++;
+      endIndex++;
+    }
+
+    return foundElementArray;
   }
 
   /*
