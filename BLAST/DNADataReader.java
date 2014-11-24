@@ -97,13 +97,14 @@ public class DNADataReader extends DNASeqReader
         Debug.println("Line " + this.getLineNumber() + ": " +
                       gi + ", " + desc);
 
+        System.out.println(numLinesNucleoInfo);
         // Then read in the lines with the sequence information.
         String seq = readSequenceString(numLinesNucleoInfo);
 
         Debug.println("Just read " + seq);
 
         DNASequence currentSequence = new DNASequence(gi, desc, seq);
-        
+
         returnToDatabase.add(currentSequence);
         Debug.println("Should be adding an element to the data structure");
     }

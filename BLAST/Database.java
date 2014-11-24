@@ -21,11 +21,11 @@ public class Database {
     //Ask the user what the filename is of the file they want to use to build the database off of
     ValidatedInputReader validInput = new ValidatedInputReader();
     String filename = new String(validInput.getString("Please provide the name of the file you would like to use to build the database.", "DNAData.txt"));
-    DNADataReader dataReader = new DNADataReader(filename, 11);
+    DNADataReader dataReader = new DNADataReader(filename, 10);
 
     sequences = dataReader.readData();
 
-    ht = new Hashtable(substrings.size()*5);
+    ht = new Hashtable(sequences.size());
 
     this.build();
   }
@@ -48,7 +48,8 @@ public class Database {
         ht.put(currentSubstring, newLocList);
       }
       else {
-        ht.get(currentSubstring).addLocation(currentLocation);
+        LocsList locationToUpdate = (LocsList)ht.get(currentSubstring);
+        locationToUpdate.addLocation(currentLocation);
       }
 
       startIndex++;
@@ -63,26 +64,12 @@ public class Database {
     @return DNASequence the sequence of the given index value, if not sequence with that value is found, return -1
   */
   public DNASequence getFullSequence(int index) {
-    if(i > sequences.size() - 1 || i < 0) {
+    if(index > sequences.size() - 1 || index < 0) {
       System.out.println("The sequence you requested was out of bounds.");
-      return -1;
+      return null;
     }
 
-    return sequences.get(i);
-  }
-
-  /*
-    <code>search</code> will return an array list of locslist's in the database that match the query
-
-    @param String query the characters to match
-    @return ArrayList<LocsList> list of matching locs, returns null if not matches were found.
-  */
-  public ArrayList<LocsList> search(String query) {
-    if(ht.containsKey(query)) {
-      return ht.get(query);
-    }
-
-    return null;
+    return sequences.get(index);
   }
 
   /*
@@ -103,7 +90,7 @@ public class Database {
     boolean success = false;
     if(ht.containsValue(value) == false) {
       //The current value is not a duplicate, continue adding it to the hashtable
-      boolean status = ht.putIfAbsent(value.hashCode(), value);
+      Object status = ht.putIfAbsent(value.hashCode(), value);
       if(status == null) {
         success = true;
       }

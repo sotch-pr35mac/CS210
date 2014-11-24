@@ -13,12 +13,12 @@ import java.io.IOException;
  * a file.  It must be put into a data structure as it is read.
  * The data structure should be chosen by the modifier of this
  * class.
- * 
+ *
  * @author Alyce Brady
  * @author Pamela Cutter
  * @version Nov 19, 2006
  */
-public class DNASeqReader 
+public class DNASeqReader
 {
     private BufferedReader reader = null;
     private int lineCounter = 0;
@@ -26,7 +26,7 @@ public class DNASeqReader
     /** Constructs an object that can read a DNA sequence string from the
      *  given file.
      */
-    public DNASeqReader(String filename) 
+    public DNASeqReader(String filename)
     {
         // Get an object that can read from the file.
         try
@@ -53,11 +53,16 @@ public class DNASeqReader
         {
             // Read a line and find the individual items.
             String nextLine = this.reader.readLine();
-            String[] items = nextLine.split(" ");
+            if(nextLine == null) {
+              break;
+            }
+            else {
+              String[] items = nextLine.split(" ");
 
-            // Concatenate all the blocks on this line.
-            for (int i = 0; i< items.length; i++) 
-                seq += items[i];
+              // Concatenate all the blocks on this line.
+              for (int i = 0; i< items.length; i++)
+                  seq += items[i];
+            }
         }
 
         return seq;
