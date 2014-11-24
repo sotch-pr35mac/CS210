@@ -8,6 +8,7 @@
 
 public class BLASTAppl {
   public static void main(String[] args) {
+    //Run the simulation
     Simulation sim = new Simulation();
     sim.runner();
   }

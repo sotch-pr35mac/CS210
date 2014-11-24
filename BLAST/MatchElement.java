@@ -12,6 +12,9 @@ public class MatchElement {
   private String subSequenceName;
   private ArrayList<Location> locationListing;
 
+  /*
+    <code>MatchElement</code> contains all the locations and sequence names of the locations that were matched from a query and the database
+  */
   public MatchElement(String subSeq, ArrayList<Location> listing) {
     this.subSequenceName = subSeq;
     this.locationListing = listing;
