@@ -36,7 +36,9 @@ public class Simulation {
       System.out.println("There were no matching DNA Sequences associated with that query.");
     }
     else {
-
+      for(int i = 0; i < locsList.size(); i++) {
+        
+      }
     }
   }
 }
