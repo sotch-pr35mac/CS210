@@ -8,9 +8,10 @@
                 It has a run method that iterates through each query and displays any matches with substrings of the DNA data that are longer than a given threshold.
 */
 
+import java.util.*;
+
 public class Simulation {
   private Database db;
-  private ArrayList<LocsList> locsList;
   private List<String> queriesList;
   private Integer threshold;
 
