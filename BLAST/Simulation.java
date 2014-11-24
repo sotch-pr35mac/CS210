@@ -11,6 +11,8 @@
 public class Simulation {
   private Database db;
   private ArrayList<LocsList> locsList;
+  private List<String> queriesList;
+  private Integer threshold;
 
   /*
   * <code>Simulation</code> creates a new database to store all the dna sequences
@@ -24,23 +26,9 @@ public class Simulation {
   */
   public void runner() {
     ValidatedInputReader validInput = new ValidatedInputReader();
-    String query; //The query to check against the database
-    Integer threshold; //the threshold of acquracy for the query
-    // Get the query information from the user
-    query = new String(validInput.getString("What is the query you could like to make against the database?", "ACCT"));
-    query = query.toLowerCase();
+    QueryReader queryReaderFile = new QueryReader(validInput.getString("What is the name of the query file you would like to use?", "Queries.txt"));
     threshold = new Integer(validInput.getInteger("Please provide a threshold value for the query.", 2, 60, 11, "The minimum value is 2, the maximum is 60."));
-
-    locsList = db.search(query);
-    if(locsList == null) {
-      System.out.println("There were no matching DNA Sequences associated with that query.");
-    }
-    else {
-      for(int i = 0; i < locsList.size(); i++) {
-        Location currentLocation = locsList.get(i);
-        DNASequence currentSequence = db.getFullSequence(currentLocation.getSequenceNumber());
-        
-      }
-    }
+    queriesList = queryReaderFile.readData();
+    System.out.println(queriesList);
   }
 }
