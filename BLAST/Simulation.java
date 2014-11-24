@@ -37,6 +37,8 @@ public class Simulation {
     }
     else {
       for(int i = 0; i < locsList.size(); i++) {
+        Location currentLocation = locsList.get(i);
+        DNASequence currentSequence = db.getFullSequence(currentLocation.getSequenceNumber());
         
       }
     }

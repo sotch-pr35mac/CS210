@@ -89,4 +89,14 @@ public class LocsList {
     }
     return -1;
   }
+
+  /*
+    <code>get</code> returns the Location stored in a certain index in the sequenceLocs array
+
+    @param int index
+    @return Location the locations of the sequnces
+  */
+  public Location get(int index) {
+    return sequenceLocs.get(index);
+  }
 }

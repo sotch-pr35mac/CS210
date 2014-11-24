@@ -12,8 +12,6 @@ import java.util.*;
 public class Database {
   private ArrayList<DNASequence> sequences; //a list of DNA Sequences.
   private Hashtable ht;
-  private Hashtable<SubstringLocs> substrings = new Hashtable<SubstringLocs>(); //An arraylist of sequence substrings and their corresponding locations
-  private Hashtable ht;
   private ArrayList<LocsList> locsList = new ArrayList<LocsList>(60);
 
   /*
@@ -56,6 +54,21 @@ public class Database {
       startIndex++;
       endIndex++;
     }
+  }
+
+  /*
+    <code>getFullSequence</code> will return the full sequence from the provided index value
+
+    @param int index of the sequence to return
+    @return DNASequence the sequence of the given index value, if not sequence with that value is found, return -1
+  */
+  public DNASequence getFullSequence(int index) {
+    if(i > sequences.size() - 1 || i < 0) {
+      System.out.println("The sequence you requested was out of bounds.");
+      return -1;
+    }
+
+    return sequences.get(i);
   }
 
   /*
