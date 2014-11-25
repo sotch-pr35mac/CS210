@@ -13,6 +13,7 @@ public class Database {
   private ArrayList<DNASequence> sequences; //a list of DNA Sequences.
   private Hashtable ht;
   private ArrayList<LocsList> locsList = new ArrayList<LocsList>(60);
+  private int score;
 
   /*
   * <code>Database</code> will contrcut a database based off the data present in a file
@@ -22,6 +23,8 @@ public class Database {
     ValidatedInputReader validInput = new ValidatedInputReader();
     String filename = new String(validInput.getString("Please provide the name of the file you would like to use to build the database.", "DNAData.txt"));
     DNADataReader dataReader = new DNADataReader(filename, 10);
+
+    score = 0;
 
     sequences = dataReader.readData();
 
@@ -58,26 +61,115 @@ public class Database {
   }
 
   /*
+    <code>checkLeft</code> will check to ensure that it is safe to run the left of the subsequence for extentions
+
+    @param int startIndex the index to start from
+    @return boolean doLeft true if it is safe to proceed left, false otherwise
+  */
+  private boolean checkLeft(int startIndex) {
+    boolean doLeft = false;
+    if(startIndex > 0) {
+      doLeft = true;
+    }
+
+    return doLeft;
+  }
+
+  /*
+    <code>checkRight</code> will check to see if it is safe to proceed extending to the right of the sequence end index for matches
+
+    @param int endIndex the end of the subsequence index
+    @param String sequence the sequence to check it on
+    @return boolean doRight returns true if it is safe to proceed to the right, returns false otherwise
+  */
+  private boolean checkRight(int endIndex, String sequence) {
+    boolean doRight = false;
+    if(sequence.substring(endIndex, endIndex+1) != "" || sequence.substring(endIndex, endIndex+1) != " ") {
+      doRight = true;
+    }
+
+    return doRight;
+  }
+
+  /*
+    <code>runLeft<code> will check to see if the characters to the left of this sequence (according to index) are matches to the full  sequence
+
+    @param String currentSequence the full sequence passed as a query
+    @param ArrayList<Location> currentListing the list of Location values for the full sequences stored in the database
+    @param int startIndex the value to move left from in the full sequence
+  */
+  private void runLeft(String currentSequence, ArrayList<Location> currentListing, int startIndex) {
+    if(startIndex > 0) {
+      //If the start of the index is not the beginning of the string extend to the left
+      for(int i = 0; i < currentListing.size(); i++) {
+        int indexOfSequence = currentListing.get(i).getSequenceNumber();
+        int indexOfSubSequence = currentListing.get(i).getSequenceIndex();
+        String sequenceToRun = sequences.get(indexOfSequence);
+        if(currentSequence.substring(startIndex - 1, startIndex) == sequenceToRun.substring(indexOfSubSequence - 1, indexOfSubSequence)) {
+          score++;
+          startIndex--;
+          this.runLeft(currentSequence, currentListing, startIndex);
+        }
+        else {
+          //There was a character mismatch, break the runLeft
+          break;
+        }
+      }
+    }
+  }
+
+  /*
     <code>search</code> will search the data base for the DNA sub-sequence of the sequence passed to it and will return an ArrayList<MatchElement>
 
     @param DNASequence the dna sequence to split into subsquences and search the databaes for that subsequence
     @return ArrayList<MatchElement> an array list of substrings that matched and their locations
   */
-  public ArrayList<MatchElement> search(String currentSequence) {
+  public ArrayList<MatchElement> search(String currentSequence, int threshold) {
     ArrayList<MatchElement> foundElementArray = new ArrayList<MatchElement>();
     int startIndex = 0; // The start index of the substring
-    int endIndex = 0; //The end index of the substring
+    int endIndex = 10; //The end index of the substring
+    boolean validRunRight = true; //boolean to check if a character had been mismatched
+    boolean validRunLeft = true; //boolean to check if a character had been mismatched
     while(endIndex <= currentSequence.length()) {
       String currentSubstring = currentSequence.substring(startIndex, endIndex); //The current substring of the current sequence
 
       if(ht.containsKey(currentSubstring) == true) {
         //The sequence was found!
-        /** Record the current sequence and its locations, add it ot the array list */
-        LocsList currentList = (LocsList)ht.get(currentSubstring);
-        MatchElement matchedElement = new MatchElement(currentSubstring, currentList.getLocationListing());
-        if(foundElementArray.contains(matchedElement) == false) {
-          //The sequence has not already been found, add it once to the array
-          foundElementArray.add(matchedElement);
+        int score = 11; //The score is 11 because there was an 11-character substring match
+        LocsList currentLocListObject = (LocsList)ht.get(currentSubstring);
+        ArrayList<Location> currentListing = currentLocListObject.getLocationListing();
+        /** Extend the sequence until a mismatch if found, score must be above threshold **/
+        for(int i = 0; currentListing.size(); i++) {
+          if(this.checkLeft() == true && validRunLeft == true) {
+            int indexOfSequence = currentListing.get(i).getSequenceNumber();
+            int indexOfSubSequence = currentListing.get(i).getSequenceIndex();
+            String sequenceToRun = sequences.get(indexOfSequence);
+            if(currentSequence.substring(startIndex - 1, startIndex) == sequenceToRun.substring(indexOfSubSequence - 1, indexOfSubSequence)) {
+              score++;
+              startIndex--;
+              validRunLeft = false;
+            }
+          }
+          if(this.checkRight() == true && validRunRight == true) {
+            int indexOfSequence = currentListing.get(i).getSequenceNumber();
+            int indexOfSubSequence = currentListing.get(i).getSequenceIndex();
+            String sequenceToRun = sequence.get(indexOfSequence);
+            if(currentSequence.substring(endIndex, endIndex + 1) == sequenceToRun.substring(indexOfSubSequence, indexOfSubSequence + 1)) {
+              score++;
+              endIndex++;
+              validRunRight = false;
+            }
+          }
+        }
+
+        if(score >= threshold) {
+          /** Record the current sequence and its locations, add it ot the array list */
+          LocsList currentList = (LocsList)ht.get(currentSubstring);
+          MatchElement matchedElement = new MatchElement(currentSubstring, currentList.getLocationListing(), score);
+          if(foundElementArray.contains(matchedElement) == false) {
+            //The sequence has not already been found, add it once to the array
+            foundElementArray.add(matchedElement);
+          }
         }
       }
 

@@ -34,14 +34,15 @@ public class Simulation {
     threshold = new Integer(validInput.getInteger("Please provide a threshold value for the query.", 2, 60, 11, "The minimum value is 2, the maximum is 60."));
     queriesList = queryReaderFile.readData();
 
-    //Break sequences up into 11 character substrings to check against the database
+    //Search the index for matches and extentions on those matches
     for(int i = 0; i < queriesList.size(); i++) {
-      ArrayList<MatchElement> elementsToAdd = db.search(queriesList.get(i));
+      ArrayList<MatchElement> elementsToAdd = db.search(queriesList.get(i), threshold);
       for(int y = 0; i < elementsToAdd.size(); i++) {
         listOfMatchedElements.add(elementsToAdd.get(i));
       }
     }
 
-    /** Here I have the list of matched elements that were found when checked against the database, now I believe that I have to extend those searches **/
+    /** Here I have all the matched elements, i suppose I should print them out now **/
+    System.out.println(listOfMatchedElements);
   }
 }

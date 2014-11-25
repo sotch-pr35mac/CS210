@@ -11,13 +11,15 @@ import java.util.*;
 public class MatchElement {
   private String subSequenceName;
   private ArrayList<Location> locationListing;
+  private int score;
 
   /*
     <code>MatchElement</code> contains all the locations and sequence names of the locations that were matched from a query and the database
   */
-  public MatchElement(String subSeq, ArrayList<Location> listing) {
+  public MatchElement(String subSeq, ArrayList<Location> listing, int scoredValue) {
     this.subSequenceName = subSeq;
     this.locationListing = listing;
+    this.score = scoredValue;
   }
 
   /*
