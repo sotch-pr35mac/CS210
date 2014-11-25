@@ -84,38 +84,11 @@ public class Database {
   */
   private boolean checkRight(int endIndex, String sequence) {
     boolean doRight = false;
-    if(sequence.substring(endIndex, endIndex+1) != "" || sequence.substring(endIndex, endIndex+1) != " ") {
+    if(sequence.length() -1 > endIndex + 1) {
       doRight = true;
     }
 
     return doRight;
-  }
-
-  /*
-    <code>runLeft<code> will check to see if the characters to the left of this sequence (according to index) are matches to the full  sequence
-
-    @param String currentSequence the full sequence passed as a query
-    @param ArrayList<Location> currentListing the list of Location values for the full sequences stored in the database
-    @param int startIndex the value to move left from in the full sequence
-  */
-  private void runLeft(String currentSequence, ArrayList<Location> currentListing, int startIndex) {
-    if(startIndex > 0) {
-      //If the start of the index is not the beginning of the string extend to the left
-      for(int i = 0; i < currentListing.size(); i++) {
-        int indexOfSequence = currentListing.get(i).getSequenceNumber();
-        int indexOfSubSequence = currentListing.get(i).getSequenceIndex();
-        String sequenceToRun = sequences.get(indexOfSequence);
-        if(currentSequence.substring(startIndex - 1, startIndex) == sequenceToRun.substring(indexOfSubSequence - 1, indexOfSubSequence)) {
-          score++;
-          startIndex--;
-          this.runLeft(currentSequence, currentListing, startIndex);
-        }
-        else {
-          //There was a character mismatch, break the runLeft
-          break;
-        }
-      }
-    }
   }
 
   /*
@@ -139,22 +112,24 @@ public class Database {
         LocsList currentLocListObject = (LocsList)ht.get(currentSubstring);
         ArrayList<Location> currentListing = currentLocListObject.getLocationListing();
         /** Extend the sequence until a mismatch if found, score must be above threshold **/
-        for(int i = 0; currentListing.size(); i++) {
-          if(this.checkLeft() == true && validRunLeft == true) {
+        for(int i = 0; i < currentListing.size(); i++) {
+          if(this.checkLeft(startIndex) == true && validRunLeft == true) {
             int indexOfSequence = currentListing.get(i).getSequenceNumber();
             int indexOfSubSequence = currentListing.get(i).getSequenceIndex();
-            String sequenceToRun = sequences.get(indexOfSequence);
-            if(currentSequence.substring(startIndex - 1, startIndex) == sequenceToRun.substring(indexOfSubSequence - 1, indexOfSubSequence)) {
+            DNASequence dnaSeq = sequences.get(indexOfSequence);
+            String sequenceToRun = dnaSeq.getSequence();
+            if(indexOfSubSequence > 0 && currentSequence.substring(startIndex - 1, startIndex) == sequenceToRun.substring(indexOfSubSequence - 1, indexOfSubSequence)) {
               score++;
               startIndex--;
               validRunLeft = false;
             }
           }
-          if(this.checkRight() == true && validRunRight == true) {
+          if(this.checkRight(endIndex, currentSequence) == true && validRunRight == true) {
             int indexOfSequence = currentListing.get(i).getSequenceNumber();
             int indexOfSubSequence = currentListing.get(i).getSequenceIndex();
-            String sequenceToRun = sequence.get(indexOfSequence);
-            if(currentSequence.substring(endIndex, endIndex + 1) == sequenceToRun.substring(indexOfSubSequence, indexOfSubSequence + 1)) {
+            DNASequence dnaSeq = sequences.get(indexOfSequence);
+            String sequenceToRun = dnaSeq.getSequence();
+            if(indexOfSubSequence > 0 && currentSequence.substring(endIndex, endIndex + 1) == sequenceToRun.substring(indexOfSubSequence, indexOfSubSequence + 1)) {
               score++;
               endIndex++;
               validRunRight = false;
