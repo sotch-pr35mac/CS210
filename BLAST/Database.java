@@ -21,7 +21,7 @@ public class Database {
   public Database() {
     //Ask the user what the filename is of the file they want to use to build the database off of
     ValidatedInputReader validInput = new ValidatedInputReader();
-    String filename = new String(validInput.getString("Please provide the name of the file you would like to use to build the database.", "DNAData.txt"));
+    String filename = new String(validInput.getString("Please provide the name of the file you would like to use to build the database.", "Viruses.txt"));
     DNADataReader dataReader = new DNADataReader(filename, 10);
 
     score = 0;
@@ -99,16 +99,18 @@ public class Database {
   */
   public ArrayList<MatchElement> search(String currentSequence, int threshold) {
     ArrayList<MatchElement> foundElementArray = new ArrayList<MatchElement>();
-    int startIndex = 0; // The start index of the substring
-    int endIndex = 10; //The end index of the substring
+    int beginIndex = 0; // The start index of the substring
+    int lastIndex = 10; //The end index of the substring
     boolean validRunRight = true; //boolean to check if a character had been mismatched
     boolean validRunLeft = true; //boolean to check if a character had been mismatched
-    while(endIndex <= currentSequence.length()) {
-      String currentSubstring = currentSequence.substring(startIndex, endIndex); //The current substring of the current sequence
+    while(lastIndex <= currentSequence.length()) {
+      String currentSubstring = currentSequence.substring(beginIndex, lastIndex); //The current substring of the current sequence
 
       if(ht.containsKey(currentSubstring) == true) {
         //The sequence was found!
         int score = 11; //The score is 11 because there was an 11-character substring match
+        int startIndex = beginIndex;
+        int endIndex = lastIndex;
         LocsList currentLocListObject = (LocsList)ht.get(currentSubstring);
         ArrayList<Location> currentListing = currentLocListObject.getLocationListing();
         /** Extend the sequence until a mismatch if found, score must be above threshold **/
@@ -121,6 +123,8 @@ public class Database {
             if(indexOfSubSequence > 0 && currentSequence.substring(startIndex - 1, startIndex) == sequenceToRun.substring(indexOfSubSequence - 1, indexOfSubSequence)) {
               score++;
               startIndex--;
+            }
+            else {
               validRunLeft = false;
             }
           }
@@ -132,24 +136,26 @@ public class Database {
             if(indexOfSubSequence > 0 && currentSequence.substring(endIndex, endIndex + 1) == sequenceToRun.substring(indexOfSubSequence, indexOfSubSequence + 1)) {
               score++;
               endIndex++;
+            }
+            else {
               validRunRight = false;
             }
           }
-        }
 
-        if(score >= threshold) {
-          /** Record the current sequence and its locations, add it ot the array list */
-          LocsList currentList = (LocsList)ht.get(currentSubstring);
-          MatchElement matchedElement = new MatchElement(currentSubstring, currentList.getLocationListing(), score);
-          if(foundElementArray.contains(matchedElement) == false) {
-            //The sequence has not already been found, add it once to the array
-            foundElementArray.add(matchedElement);
+          if(score >= threshold) {
+            /** Record the current sequence and its locations, add it ot the array list */
+            LocsList currentList = (LocsList)ht.get(currentSubstring);
+            MatchElement matchedElement = new MatchElement(currentSubstring, currentList.getLocationListing(), score);
+            if(foundElementArray.contains(matchedElement) == false) {
+              //The sequence has not already been found, add it once to the array
+              foundElementArray.add(matchedElement);
+            }
           }
         }
       }
 
-      startIndex++;
-      endIndex++;
+      beginIndex++;
+      lastIndex++;
     }
 
     return foundElementArray;

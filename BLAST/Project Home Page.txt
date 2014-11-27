@@ -1,1 +1,0 @@
-http://www.cs.kzoo.edu/cs210/Labs/DNASequenceMatching/BLASTppWithDesign.html

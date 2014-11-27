@@ -6,6 +6,7 @@
   Assignment: BLAST
   Description: This class will store a list of Location objects
 */
+
 import java.util.ArrayList;
 
 public class LocsList {

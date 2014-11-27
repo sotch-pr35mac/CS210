@@ -18,6 +18,8 @@ import java.util.*;
  * @author Pamela Cutter
  * @author Alyce Brady
  * @version Nov 19, 2006
+ * @updated Preston Stosur-Bassett
+ * @updated Nov, 20, 2014
  */
 public class DNADataReader extends DNASeqReader
 {
@@ -97,7 +99,7 @@ public class DNADataReader extends DNASeqReader
         Debug.println("Line " + this.getLineNumber() + ": " +
                       gi + ", " + desc);
 
-        System.out.println(numLinesNucleoInfo);
+        //System.out.println(numLinesNucleoInfo);
         // Then read in the lines with the sequence information.
         String seq = readSequenceString(numLinesNucleoInfo);
 

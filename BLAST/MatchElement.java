@@ -40,4 +40,13 @@ public class MatchElement {
   public boolean equals(MatchElement checkAgainst) {
     return this.subSequenceName.equals(checkAgainst.getSubSeq());
   }
+
+  /*
+    <code>toString</code> overrides the default Object.toString() method to return a string of this object instance when it is called.
+
+    @return String subSequenceName, the subsequence stored in this element
+  */
+  public String toString() {
+    return subSequenceName;
+  }
 }

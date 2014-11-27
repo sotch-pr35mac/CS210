@@ -42,7 +42,10 @@ public class Simulation {
       }
     }
 
-    /** Here I have all the matched elements, i suppose I should print them out now **/
-    System.out.println(listOfMatchedElements);
+    /** All matches found, print them out **/
+    System.out.println("Your query returned the following results: ");
+    for(int i = 0; i < listOfMatchedElements.size(); i++) {
+      System.out.print(listOfMatchedElements.get(i)+", ");
+    }
   }
 }
